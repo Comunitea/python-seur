@@ -30,6 +30,9 @@ setup(name='seur',
             'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
             'Topic :: Software Development :: Libraries :: Python Modules',
             ],
+        install_requires=[
+            'genshi',
+            ],
         license='GPL-3',
         extras_require={
         },
