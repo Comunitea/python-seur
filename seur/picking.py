@@ -65,9 +65,9 @@ class Picking(API):
             'cliente_atencion': data.get('cliente_atencion', ''),
             }
 
-        method = 'ImprimirECBWebService'
+        url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
         xml = tmpl.generate(**vals).render()
-        result = self.connect(method, xml)
+        result = self.connect(url, xml)
         dom = parseString(result)
 
         #Get message error from XML
@@ -88,3 +88,30 @@ class Picking(API):
             label = pdf[0].firstChild.data
 
         return reference, label, error
+
+    def info(self, data):
+        """
+        Picking info using the given data
+
+        :param data: Dictionary of values
+        :return: info dict
+        """
+        tmpl = loader.load('picking_info.xml')
+
+        vals = {
+            'username': self.username,
+            'password': self.password,
+            'expedicion': data.get('expedicion', 'S'),
+            'reference': data.get('reference'),
+            'service': data.get('service', '0'),
+            'public': data.get('public', 'N'),
+            }
+
+        url = 'https://ws.seur.com/webseur/services/WSConsultaExpediciones'
+        xml = tmpl.generate(**vals).render()
+        result = self.connect(url, xml)
+        dom = parseString(result)
+
+        #Get info
+        info = dom.getElementsByTagName('out')
+        return info[0].firstChild.data

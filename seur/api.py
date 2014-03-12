@@ -1,8 +1,6 @@
 #This file is part of seur. The COPYRIGHT file at the top level of
 #this repository contains the full copyright notices and license terms.
 
-from seur.utils import seur_url
-
 from xml.dom.minidom import parseString
 import urllib2
 import os
@@ -50,7 +48,6 @@ class API(object):
         :param ci: franchise code
         :param ccc: identification description
         """
-        self.url = seur_url(debug)
         self.username = username
         self.password = password
         self.vat = vat
@@ -65,7 +62,7 @@ class API(object):
     def __exit__(self, type, value, traceback):
         return self
 
-    def connect(self, method, xml):
+    def connect(self, url, xml):
         """
         Connect to the Webservices and return XML data from seur
 
@@ -74,7 +71,6 @@ class API(object):
         
         Return XML object
         """
-        url = '%s%s' % (self.url, method)
         headers={}
         request = urllib2.Request(url, xml, headers)
         response = urllib2.urlopen(request)
@@ -95,9 +91,9 @@ class API(object):
             'in7': self.in7,
             }
 
-        method = 'ImprimirECBWebService'
+        url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
         xml = tmpl.generate(**vals).render()
-        result = self.connect(method, xml)
+        result = self.connect(url, xml)
         dom = parseString(result)
 
         #Get message connection

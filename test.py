@@ -1,5 +1,7 @@
 username = ''
 password = ''
+username_expedicion = ''
+password_expedicion = ''
 vat = '' #VAT company
 in5 = '' # Franchise code
 in7 = '' #Description ID Seur
@@ -56,3 +58,16 @@ with Picking(username, password, vat, in5, in7, ci, ccc, debug) as picking_api:
     with open("/tmp/seur-label.pdf","wb") as f:
         f.write(decodestring(label))
     print "Generated PDF label in /tmp/"
+
+with Picking(username_expedicion, password_expedicion, vat, in5, in7, ci, ccc, debug) as picking_api:
+
+    print "Get info picking"
+    data = {}
+
+    data['expedicion'] = 'S'
+    data['reference'] = reference
+    data['service'] = '0'
+    data['public'] = 'N'
+
+    info = picking_api.info(data)
+    print info
