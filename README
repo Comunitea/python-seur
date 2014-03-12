@@ -1,6 +1,50 @@
-seur
+Seur
 ====
 
-Python API Seur carrier
+Python API Seur carrier, Spain.
+
+Features
+--------
+
+- Services
+- Test connection
+- Get cities by zio
+- Create/Send shipments to Seur Valencia
+- Get today deliveries (shipments) in PDF
+
+Usage Examples
+--------------
 
 Example API in test.py file
+
+Services
+--------
+
+.. code-block:: python
+
+    from seur.utils import services
+    services()
+
+Test connection
+---------------
+
+.. code-block:: python
+
+    with API(username, password, vat, in5, in7, ci, ccc, debug) as seur_api:
+        print seur_api.test_connection()
+
+Create/send shipment to Seur
+----------------------------
+
+.. code-block:: python
+
+    with Picking(username, password, vat, in5, in7, ci, ccc, debug) as picking_api:
+        reference, label, error = picking_api.create(data)
+
+Get Picking Info
+----------------
+
+.. code-block:: python
+
+    with Picking(username_expedicion, password_expedicion, vat, in5, in7, ci, ccc, debug) as picking_api:
+        info = picking_api.info(data)
