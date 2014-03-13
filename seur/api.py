@@ -37,7 +37,7 @@ class API(object):
 
             from seur.api import API
 
-            with API(username, password) as seur_api:
+            with API(username, password, vat, in5, in7, ci, ccc) as seur_api:
                 return seur_api.test_connection()
 
         :param username: API username of the Seur Web Services.
@@ -66,7 +66,7 @@ class API(object):
         """
         Connect to the Webservices and return XML data from seur
 
-        :param method: method service.
+        :param url: url service.
         :param xml: XML data.
         
         Return XML object
