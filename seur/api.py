@@ -21,13 +21,14 @@ class API(object):
         'username',
         'password',
         'vat',
-        'in5',
-        'in7',
+        'franchise',
+        'seurid',
         'ci',
         'ccc',
+        'context',
     )
 
-    def __init__(self, username, password, vat, in5, in7, ci, ccc, debug=False):
+    def __init__(self, username, password, vat, franchise, seurid, ci, ccc, context={}):
         """
         This is the Base API class which other APIs have to subclass. By
         default the inherited classes also get the properties of this
@@ -37,24 +38,25 @@ class API(object):
 
             from seur.api import API
 
-            with API(username, password, vat, in5, in7, ci, ccc) as seur_api:
+            with API(username, password, vat, franchise, seurid, ci, ccc) as seur_api:
                 return seur_api.test_connection()
 
         :param username: API username of the Seur Web Services.
         :param password: API password of the Seur Web Services.
         :param vat: company vat
-        :param in5: franchise code
-        :param in7: identification description
+        :param franchise: franchise code
+        :param seurid: identification description
         :param ci: franchise code
         :param ccc: identification description
         """
         self.username = username
         self.password = password
         self.vat = vat
-        self.in5 = in5
-        self.in7 = in7
+        self.franchise = franchise
+        self.seurid = seurid
         self.ci = ci
         self.ccc = ccc
+        self.context = context
 
     def __enter__(self):
         return self
@@ -87,8 +89,8 @@ class API(object):
             'username': self.username,
             'password': self.password,
             'vat': self.vat,
-            'in5': self.in5,
-            'in7': self.in7,
+            'franchise': self.franchise,
+            'seurid': self.seurid,
             }
 
         url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'

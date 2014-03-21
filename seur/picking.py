@@ -30,14 +30,17 @@ class Picking(API):
         label = None
         error = None
 
-        tmpl = loader.load('picking_send.xml')
+        if self.context.get('pdf'):
+            tmpl = loader.load('picking_send_pdf.xml')
+        else:
+            tmpl = loader.load('picking_send.xml')
 
         vals = {
             'username': self.username,
             'password': self.password,
             'vat': self.vat,
-            'in5': self.in5,
-            'in7': self.in7,
+            'franchise': self.franchise,
+            'seurid': self.seurid,
             'ci': self.ci,
             'ccc': self.ccc,
             'servicio': data.get('servicio', '1'),
@@ -65,8 +68,14 @@ class Picking(API):
             'cliente_atencion': data.get('cliente_atencion', ''),
             }
 
+        if not self.context.get('pdf'):
+            vals['printer'] = self.context.get('printer', 'ZEBRA')
+            vals['printer_model'] = self.context.get('printer_model', 'LP2844-Z')
+            vals['ecb_code'] = self.context.get('ecb_code', '2C')
+
         url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
         xml = tmpl.generate(**vals).render()
+
         result = self.connect(url, xml)
         dom = parseString(result)
 
@@ -82,10 +91,16 @@ class Picking(API):
         if ecb:
             reference = ecb[0].childNodes[0].firstChild.data
 
-        #Get PDF file from XML
-        pdf = dom.getElementsByTagName('PDF')
-        if pdf:
-            label = pdf[0].firstChild.data
+        if self.context.get('pdf'):
+            #Get PDF file from XML
+            pdf = dom.getElementsByTagName('PDF')
+            if pdf:
+                label = pdf[0].firstChild.data
+        else:
+            #Get TXT file from XML
+            traza = dom.getElementsByTagName('traza')
+            if traza:
+                label = traza[0].firstChild.data
 
         return reference, label, error
 

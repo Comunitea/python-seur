@@ -1,13 +1,10 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imp="http://localhost:7026/ImprimirECBWebService">
     <soapenv:Header/>
     <soapenv:Body>
-        <imp:impresionIntegracionConECBWS>
+        <imp:impresionIntegracionPDFConECBWS>
             <imp:in0>${username}</imp:in0>
             <imp:in1>${password}</imp:in1>
-            <imp:in2>${printer}</imp:in2>
-            <imp:in3>${printer_model}</imp:in3>
-            <imp:in4>${ecb_code}</imp:in4>
-            <imp:in5>
+            <imp:in2>
                 <![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
                 <root>
                     <exp>
@@ -42,12 +39,12 @@
                     </exp>
                 </root>
                 ]]>
-            </imp:in5>
-            <imp:in6>fichero.xml</imp:in6>
-            <imp:in7>${vat}</imp:in7>
-            <imp:in8>${franchise}</imp:in8>
-            <imp:in9>-1</imp:in9>
-            <imp:in10>${seurid}</imp:in10>
-        </imp:impresionIntegracionConECBWS>
+            </imp:in2>
+            <imp:in3>fichero.xml</imp:in3>
+            <imp:in4>${vat}</imp:in4>
+            <imp:in5>${franchise}</imp:in5>
+            <imp:in6>-1</imp:in6>
+            <imp:in7>${seurid}</imp:in7>
+        </imp:impresionIntegracionPDFConECBWS>
     </soapenv:Body>
 </soapenv:Envelope>

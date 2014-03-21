@@ -3,11 +3,15 @@ password = ''
 username_expedicion = ''
 password_expedicion = ''
 vat = '' #VAT company
-in5 = '' # Franchise code
-in7 = '' #Description ID Seur
+franchise = '' # Franchise code
+seurid = '' #Description ID Seur
 ci = '' #Customer Code Seur
 ccc = '' #Account Code Seur
-debug = True
+
+context = {}
+context['printer'] = 'ZEBRA'
+context['printer_model'] = 'LP2844-Z'
+context['ecb_code'] = '2C'
 
 from seur.picking import *
 from seur.utils import services
@@ -17,14 +21,14 @@ print "Seur services"
 services = services()
 print services
 
-with API(username, password, vat, in5, in7, ci, ccc, debug) as seur_api:
+with API(username, password, vat, franchise, seurid, ci, ccc, context) as seur_api:
     print "Test connection"
     print seur_api.test_connection()
 
-with Picking(username, password, vat, in5, in7, ci, ccc, debug) as picking_api:
-    print "Send a new shipment"
-    data = {}
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
 
+    print "Send a new shipment - Label ECB"
+    data = {}
     data['servicio'] = '1'
     data['product'] = '2'
     data['total_bultos'] = '1'
@@ -50,16 +54,30 @@ with Picking(username, password, vat, in5, in7, ci, ccc, debug) as picking_api:
     data['cliente_atencion'] = 'Raimon Esteve'
 
     reference, label, error = picking_api.create(data)
+
     if error:
         print error
 
     print reference
 
+    with open("/tmp/seur-label.txt","wb") as f:
+        f.write(label)
+    print "Generated label in /tmp/seur-label.txt"
+
+context['pdf'] = True
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+    print "Send a new shipment - Label PDF"
+    reference, label, error = picking_api.create(data)
+
+    if error:
+        print error
+
+    print reference
     with open("/tmp/seur-label.pdf","wb") as f:
         f.write(decodestring(label))
-    print "Generated PDF label in /tmp/"
+    print "Generated PDF label in /tmp/seur-label.pdf"
 
-with Picking(username_expedicion, password_expedicion, vat, in5, in7, ci, ccc, debug) as picking_api:
+with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
 
     print "Get info picking"
     data = {}
