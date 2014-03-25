@@ -36,9 +36,9 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     data['observaciones'] = 'Testing Seur API - Create shipments'
     data['referencia_expedicion'] = 'S/OUT/0001'
     data['ref_bulto'] = 'S/OUT/0001'
-    #~ data['clave_portes'] = 
-    #~ data['clave_reembolso'] = 
-    #~ data['valor_reembolso'] = 
+    #~ data['clave_portes'] = '' # Add F to invoice
+    #~ data['clave_reembolso'] = '' # Add F to invoice
+    #~ data['valor_reembolso'] = ''
     data['cliente_nombre'] = 'Zikzakmedia SL'
     data['cliente_direccion'] = 'Docror Fleming, 28. Baixos'
     #~ data['cliente_tipovia'] = 'CL'
