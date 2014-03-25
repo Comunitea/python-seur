@@ -5,6 +5,7 @@ from seur.api import API
 
 from xml.dom.minidom import parseString
 import os
+import datetime
 import genshi
 import genshi.template
 
@@ -128,5 +129,37 @@ class Picking(API):
         dom = parseString(result)
 
         #Get info
+        info = dom.getElementsByTagName('out')
+        return info[0].firstChild.data
+
+    def list(self, data):
+        """
+        Picking list using the given data
+
+        :param data: Dictionary of values
+        :return: list dict
+        """
+        tmpl = loader.load('picking_list.xml')
+
+        t = datetime.datetime.now()
+        today = '%s-%s-%s' % (t.day, t.month, t.year)
+
+        vals = {
+            'username': self.username,
+            'password': self.password,
+            'ccc': self.ccc,
+            'expedicion': data.get('expedicion', 'S'),
+            'date_from': data.get('from', today),
+            'date_to': data.get('to', today),
+            'service': data.get('service', '0'),
+            'public': data.get('public', 'N'),
+            }
+
+        url = 'https://ws.seur.com/webseur/services/WSConsultaExpediciones'
+        xml = tmpl.generate(**vals).render()
+        result = self.connect(url, xml)
+        dom = parseString(result)
+
+        #Get list
         info = dom.getElementsByTagName('out')
         return info[0].firstChild.data

@@ -11,6 +11,7 @@ Features
 - Get cities by zio
 - Create/Send shipments to Seur
 - Get info delivery (shipment)
+- Get list deliveries (shipments) from date
 
 Usage Examples
 --------------
@@ -58,4 +59,23 @@ Get Picking Info
 .. code-block:: python
 
     with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+        data = {}
+        data['expedicion'] = 'S'
+        data['public'] = 'N'
+        data['reference'] = 'SEURREFERENCE'
         info = picking_api.info(data)
+
+Get Picking List
+----------------
+
+.. code-block:: python
+
+    with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+        data = {}
+        data['expedicion'] = 'S'
+        data['public'] = 'N'
+        data['from'] = '19-03-2014'
+        data['to'] = '19-03-2014'
+        shipments = picking_api.list(data)
+
+If don't pass from or to values, get today date.

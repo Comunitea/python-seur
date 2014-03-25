@@ -89,3 +89,14 @@ with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, c
 
     info = picking_api.info(data)
     print info
+
+with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+
+    print "Get list picking"
+    data = {}
+
+    data['expedicion'] = 'S'
+    data['public'] = 'N'
+
+    info = picking_api.list(data)
+    print info
