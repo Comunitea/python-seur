@@ -51,8 +51,8 @@ class Picking(API):
             'observaciones': data.get('observaciones', ''),
             'referencia_expedicion': data.get('referencia_expedicion', ''),
             'ref_bulto': data.get('ref_bulto', ''),
-            'clave_portes': data.get('clave_portes', ''), # F: Facturacion
-            'clave_reembolso': data.get('clave_reembolso', ''), # F: Facturacion
+            'clave_portes': data.get('clave_portes', 'F'), # F: Facturacion
+            'clave_reembolso': data.get('clave_reembolso', 'F'), # F: Facturacion
             'valor_reembolso': data.get('valor_reembolso', ''),
             'cliente_nombre': data.get('cliente_nombre', ''),
             'cliente_direccion': data.get('cliente_direccion', ''),
