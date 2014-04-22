@@ -47,7 +47,8 @@ class Picking(API):
             'servicio': data.get('servicio', '1'),
             'product': data.get('product', '2'),
             'total_bultos': data.get('total_bultos', '1'),
-            'total_kilos': data.get('total_kilos', '0.1'),
+            'total_kilos': data.get('total_kilos', '1'),
+            'peso_bulto': data.get('peso_bulto', '1'),
             'observaciones': data.get('observaciones', ''),
             'referencia_expedicion': data.get('referencia_expedicion', ''),
             'ref_bulto': data.get('ref_bulto', ''),
@@ -65,6 +66,7 @@ class Picking(API):
             'cliente_poblacion': data.get('cliente_poblacion', ''),
             'cliente_cpostal': data.get('cliente_cpostal', ''),
             'cliente_pais': data.get('cliente_pais', ''),
+            'cliente_email': data.get('cliente_email', ''),
             'cliente_telefono': data.get('cliente_telefono', ''),
             'cliente_atencion': data.get('cliente_atencion', ''),
             }

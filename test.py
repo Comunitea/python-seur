@@ -50,6 +50,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     data['cliente_poblacion'] = 'Vilafranca del Penedes'
     data['cliente_cpostal'] = '08720'
     data['cliente_pais'] = 'ES'
+    data['cliente_email'] = 'zikzak@zikzakmedia.com'
     data['cliente_telefono'] = '938902108'
     data['cliente_atencion'] = 'Raimon Esteve'
 

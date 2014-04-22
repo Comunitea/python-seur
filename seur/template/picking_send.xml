@@ -19,6 +19,7 @@
                             <producto>${product}</producto>
                             <total_bultos>${total_bultos}</total_bultos>
                             <total_kilos>${total_kilos}</total_kilos>
+                            <pesoBulto>${peso_bulto}</pesoBulto>
                             <observaciones>${observaciones}</observaciones>
                             <referencia_expedicion>${referencia_expedicion}</referencia_expedicion>
                             <ref_bulto>${ref_bulto}</ref_bulto>
@@ -36,6 +37,7 @@
                             <poblacion_consignatario>${cliente_poblacion}</poblacion_consignatario>
                             <codPostal_consignatario>${cliente_cpostal}</codPostal_consignatario>
                             <pais_consignatario>${cliente_pais}</pais_consignatario>
+                            <email_consignatario>${cliente_email}</email_consignatario>
                             <telefono_consignatario>${cliente_telefono}</telefono_consignatario>
                             <atencion_de>${cliente_atencion}</atencion_de>
                         </bulto>
