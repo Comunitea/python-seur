@@ -191,11 +191,14 @@ class Picking(API):
         dom2 = parseString(data)
         registros = dom2.getElementsByTagName('REGISTROS')
 
+        total = registros[0].childNodes.length
+
         values = []
-        for reg in ['REG1', 'REG2', 'REG3', 'REG4', 'REG5']:
-            reg1 = registros[0].getElementsByTagName(reg)[0]
+        for i in range(1, total+1):
+            reg_name = 'REG%s' % i
+            reg = registros[0].getElementsByTagName(reg_name)[0]
             vals = {}
-            for r in reg1.childNodes:
+            for r in reg.childNodes:
                 vals[r.nodeName] = r.firstChild.data
             values.append(vals)
 
@@ -227,11 +230,14 @@ class Picking(API):
         dom2 = parseString(data)
         registros = dom2.getElementsByTagName('REGISTROS')
 
+        total = registros[0].childNodes.length
+
         values = []
-        for reg in ['REG1', 'REG2', 'REG3']:
-            reg1 = registros[0].getElementsByTagName(reg)[0]
+        for i in range(1, total+1):
+            reg_name = 'REG%s' % i
+            reg = registros[0].getElementsByTagName(reg_name)[0]
             vals = {}
-            for r in reg1.childNodes:
+            for r in reg.childNodes:
                 vals[r.nodeName] = r.firstChild.data
             values.append(vals)
 
