@@ -79,3 +79,20 @@ Get Picking List
         shipments = picking_api.list(data)
 
 If don't pass from or to values, get today date.
+
+Get city or zip exist from Seur API
+-----------------------------------
+
+.. code-block:: python
+
+    with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+
+        city = 'Granollers' # or upper
+        options = picking_api.city(city)
+
+        zip = '08720'
+        options =  picking_api.zip(zip)
+
+Return dict values from seur.
+These methods are important to call when create a new/send picking because Seur
+validate city value and  requires city exist in their system.

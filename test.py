@@ -47,7 +47,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     #~ data['cliente_escalera'] = 'A'
     #~ data['cliente_piso'] = '3'
     #~ data['cliente_puerta'] = '2'
-    data['cliente_poblacion'] = 'Vilafranca del Penedes'
+    data['cliente_poblacion'] = 'Vilafranca del Penedes' # Important city exist in Seur. Get Seur values from zip method
     data['cliente_cpostal'] = '08720'
     data['cliente_pais'] = 'ES'
     data['cliente_email'] = 'zikzak@zikzakmedia.com'
@@ -101,3 +101,13 @@ with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, c
 
     info = picking_api.list(data)
     print info
+
+with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+
+    print "Get values from Seur about city or zip"
+
+    city = 'Granollers'
+    print picking_api.city(city)
+
+    zip = '08720'
+    print picking_api.zip(zip)

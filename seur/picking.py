@@ -165,3 +165,74 @@ class Picking(API):
         #Get list
         info = dom.getElementsByTagName('out')
         return info[0].firstChild.data
+
+    def city(self, city):
+        """
+        Get Seur values from city
+
+        :param city: string
+        :return: dict
+        """
+        tmpl = loader.load('city.xml')
+
+        vals = {
+            'username': self.username,
+            'password': self.password,
+            'city': city.upper(),
+            }
+
+        url = 'https://ws.seur.com/WSEcatalogoPublicos/servlet/XFireServlet/WSServiciosWebPublicos'
+        xml = tmpl.generate(**vals).render()
+        result = self.connect(url, xml)
+
+        dom = parseString(result)
+        info = dom.getElementsByTagName('out')
+        data = info[0].firstChild.data
+        dom2 = parseString(data)
+        registros = dom2.getElementsByTagName('REGISTROS')
+
+        values = []
+        for reg in ['REG1', 'REG2', 'REG3', 'REG4', 'REG5']:
+            reg1 = registros[0].getElementsByTagName(reg)[0]
+            vals = {}
+            for r in reg1.childNodes:
+                vals[r.nodeName] = r.firstChild.data
+            values.append(vals)
+
+        return values
+
+    def zip(self, zip):
+        """
+        Get Seur values from zip
+
+        :param zip: string
+        :return: list dict
+        """
+        tmpl = loader.load('zip.xml')
+
+        vals = {
+            'username': self.username,
+            'password': self.password,
+            'zip': zip,
+            }
+
+        url = 'https://ws.seur.com/WSEcatalogoPublicos/servlet/XFireServlet/WSServiciosWebPublicos'
+        xml = tmpl.generate(**vals).render()
+        result = self.connect(url, xml)
+
+        dom = parseString(result)
+        info = dom.getElementsByTagName('out')
+        data = info[0].firstChild.data
+
+        dom2 = parseString(data)
+        registros = dom2.getElementsByTagName('REGISTROS')
+
+        values = []
+        for reg in ['REG1', 'REG2', 'REG3']:
+            reg1 = registros[0].getElementsByTagName(reg)[0]
+            vals = {}
+            for r in reg1.childNodes:
+                vals[r.nodeName] = r.firstChild.data
+            values.append(vals)
+
+        return values
