@@ -102,7 +102,7 @@ with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, c
     info = picking_api.list(data)
     print info
 
-with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
 
     print "Get values from Seur about city or zip"
 

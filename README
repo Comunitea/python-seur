@@ -85,7 +85,7 @@ Get city or zip exist from Seur API
 
 .. code-block:: python
 
-    with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+    with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
 
         city = 'Granollers' # or upper
         options = picking_api.city(city)
