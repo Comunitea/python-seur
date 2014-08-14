@@ -3,8 +3,8 @@
    <soapenv:Body>
       <ecat:infoPoblacionesCortoStr>
          <ecat:in0></ecat:in0>
-         <ecat:in1></ecat:in1>
-         <ecat:in2>${zip}</ecat:in2>
+         <ecat:in1>${zip}</ecat:in1>
+         <ecat:in2></ecat:in2>
          <ecat:in3></ecat:in3>
          <ecat:in4></ecat:in4>
          <ecat:in5>${username}</ecat:in5>

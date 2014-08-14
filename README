@@ -8,7 +8,7 @@ Features
 
 - Services
 - Test connection
-- Get cities by zio
+- Get cities by zip
 - Create/Send shipments to Seur
 - Get info delivery (shipment)
 - Get list deliveries (shipments) from date
