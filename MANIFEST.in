@@ -4,3 +4,5 @@ include README
 include CHANGELOG
 include INSTALL
 include seur/*
+include seur/template/*.xml
+
