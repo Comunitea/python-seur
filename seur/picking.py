@@ -166,6 +166,75 @@ class Picking(API):
         info = dom.getElementsByTagName('out')
         return info[0].firstChild.data
 
+    def label(self, data):
+        """
+        Get label picking using reference
+
+        :param data: Dictionary of values
+        :return: string
+        """
+        if self.context.get('pdf'):
+            tmpl = loader.load('picking_label_pdf.xml')
+        else:
+            tmpl = loader.load('picking_label.xml')
+
+        vals = {
+            'username': self.username,
+            'password': self.password,
+            'vat': self.vat,
+            'franchise': self.franchise,
+            'seurid': self.seurid,
+            'ci': self.ci,
+            'ccc': self.ccc,
+            'servicio': data.get('servicio', '1'),
+            'product': data.get('product', '2'),
+            'total_bultos': data.get('total_bultos', '1'),
+            'total_kilos': data.get('total_kilos', '1'),
+            'peso_bulto': data.get('peso_bulto', '1'),
+            'observaciones': data.get('observaciones', ''),
+            'referencia_expedicion': data.get('referencia_expedicion', ''),
+            'ref_bulto': data.get('ref_bulto', ''),
+            'clave_portes': data.get('clave_portes', 'F'), # F: Facturacion
+            'clave_reembolso': data.get('clave_reembolso', 'F'), # F: Facturacion
+            'valor_reembolso': data.get('valor_reembolso', ''),
+            'cliente_nombre': data.get('cliente_nombre', ''),
+            'cliente_direccion': data.get('cliente_direccion', ''),
+            'cliente_tipovia': data.get('cliente_tipovia', 'CL'),
+            'cliente_tnumvia': data.get('cliente_tnumvia', 'N'),
+            'cliente_numvia': data.get('cliente_numvia', '.'),
+            'cliente_escalera': data.get('cliente_escalera', '.'),
+            'cliente_piso': data.get('cliente_piso', '.'),
+            'cliente_puerta': data.get('cliente_puerta', ''),
+            'cliente_poblacion': data.get('cliente_poblacion', ''),
+            'cliente_cpostal': data.get('cliente_cpostal', ''),
+            'cliente_pais': data.get('cliente_pais', ''),
+            'cliente_email': data.get('cliente_email', ''),
+            'cliente_telefono': data.get('cliente_telefono', ''),
+            'cliente_atencion': data.get('cliente_atencion', ''),
+            }
+
+        if not self.context.get('pdf'):
+            vals['printer'] = self.context.get('printer', 'ZEBRA')
+            vals['printer_model'] = self.context.get('printer_model', 'LP2844-Z')
+            vals['ecb_code'] = self.context.get('ecb_code', '2C')
+
+        url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
+        xml = tmpl.generate(**vals).render()
+
+        result = self.connect(url, xml)
+        dom = parseString(result)
+
+        if self.context.get('pdf'):
+            pdf = dom.getElementsByTagName('PDF')
+            if pdf:
+                return pdf[0].firstChild.data
+        else:
+            traza = dom.getElementsByTagName('traza')
+            if traza:
+                return traza[0].firstChild.data
+
+        return None
+
     def city(self, city):
         """
         Get Seur values from city

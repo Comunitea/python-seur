@@ -26,8 +26,8 @@ with API(username, password, vat, franchise, seurid, ci, ccc, context) as seur_a
     print seur_api.test_connection()
 
 with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
-
     print "Send a new shipment - Label ECB"
+
     data = {}
     data['servicio'] = '1'
     data['product'] = '2'
@@ -79,7 +79,6 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     print "Generated PDF label in /tmp/seur-label.pdf"
 
 with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
-
     print "Get info picking"
     data = {}
 
@@ -101,6 +100,41 @@ with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, c
 
     info = picking_api.list(data)
     print info
+
+context['pdf'] = True
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+    print "Get Label PDF"
+
+    data = {}
+    data['servicio'] = '1'
+    data['product'] = '2'
+    data['total_bultos'] = '1'
+    #~ data['total_kilos'] = 
+    data['observaciones'] = 'Testing Seur API - Get Label'
+    data['referencia_expedicion'] = 'S/OUT/0001'
+    data['ref_bulto'] = 'S/OUT/0001'
+    #~ data['clave_portes'] = '' # Add F to invoice
+    #~ data['clave_reembolso'] = '' # Add F to invoice
+    #~ data['valor_reembolso'] = ''
+    data['cliente_nombre'] = 'Zikzakmedia SL'
+    data['cliente_direccion'] = 'Sant Jaume, 9. Baixos 2'
+    #~ data['cliente_tipovia'] = 'CL'
+    #~ data['cliente_tnumvia'] = 'N'
+    #~ data['cliente_numvia'] = '93'
+    #~ data['cliente_escalera'] = 'A'
+    #~ data['cliente_piso'] = '3'
+    #~ data['cliente_puerta'] = '2'
+    data['cliente_poblacion'] = 'Vilafranca del Penedes' # Important city exist in Seur. Get Seur values from zip method
+    data['cliente_cpostal'] = '08720'
+    data['cliente_pais'] = 'ES'
+    data['cliente_email'] = 'zikzak@zikzakmedia.com'
+    data['cliente_telefono'] = '938902108'
+    data['cliente_atencion'] = 'Raimon Esteve'
+    label = picking_api.label(data)
+
+    with open("/tmp/seur-label.pdf","wb") as f:
+        f.write(decodestring(label))
+    print "Generated PDF label in /tmp/seur-label.pdf"
 
 with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
 
