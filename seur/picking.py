@@ -253,7 +253,9 @@ class Picking(API):
             'ci': self.ci,
             'ccc': self.ccc,
         }
-        if not data.get('date'):
+        if data.get('date'):
+            vals['date'] = data.get('date')
+        else:
             d = datetime.datetime.now()
             vals['date'] = '%s-%s-%s' % (d.year, d.strftime('%m'), d.strftime('%d'))
 
