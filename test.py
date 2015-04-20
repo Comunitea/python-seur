@@ -137,7 +137,16 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     print "Generated PDF label in /tmp/seur-label.pdf"
 
 with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+    print "Get Manifiesto"
 
+    data = {}
+    manifiesto = picking_api.manifiesto(data)
+
+    with open("/tmp/seur-manifiesto.pdf","wb") as f:
+        f.write(decodestring(manifiesto))
+    print "Generated PDF label in /tmp/seur-manifiesto.pdf"
+
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
     print "Get values from Seur about city or zip"
 
     city = 'Granollers'

@@ -235,6 +235,39 @@ class Picking(API):
 
         return None
 
+    def manifiesto(self, data):
+        """
+        Get Manifiesto
+
+        :param data: Dictionary of values
+        :return: string
+        """
+        tmpl = loader.load('manifiesto.xml')
+
+        vals = {
+            'username': self.username,
+            'password': self.password,
+            'vat': self.vat,
+            'franchise': self.franchise,
+            'seurid': self.seurid,
+            'ci': self.ci,
+            'ccc': self.ccc,
+        }
+        if not data.get('date'):
+            d = datetime.datetime.now()
+            vals['date'] = '%s-%s-%s' % (d.year, d.strftime('%m'), d.strftime('%d'))
+
+        url = 'http://cit.seur.com/CIT-war/services/DetalleBultoPDFWebService'
+        xml = tmpl.generate(**vals).render()
+
+        result = self.connect(url, xml)
+        dom = parseString(result)
+
+        pdf = dom.getElementsByTagName('ns1:out')
+        if pdf:
+            return pdf[0].firstChild.data
+        return
+
     def city(self, city):
         """
         Get Seur values from city
