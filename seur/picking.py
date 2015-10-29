@@ -292,7 +292,7 @@ class Picking(API):
         dom = parseString(result)
         info = dom.getElementsByTagName('out')
         data = info[0].firstChild.data
-        dom2 = parseString(data)
+        dom2 = parseString(data.encode('utf-8'))
         registros = dom2.getElementsByTagName('REGISTROS')
 
         total = registros[0].childNodes.length
@@ -331,7 +331,7 @@ class Picking(API):
         info = dom.getElementsByTagName('ns1:out')
         data = info[0].firstChild.data
 
-        dom2 = parseString(data)
+        dom2 = parseString(data.encode('utf-8'))
         registros = dom2.getElementsByTagName('REGISTROS')
 
         total = registros[0].childNodes.length
