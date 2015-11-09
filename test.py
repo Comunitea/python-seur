@@ -31,7 +31,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     data = {}
     data['servicio'] = '1'
     data['product'] = '2'
-    data['total_bultos'] = '1'
+    data['total_bultos'] = 1
     #~ data['total_kilos'] = 
     data['observaciones'] = 'Testing Seur API - Create shipments'
     data['referencia_expedicion'] = 'S/OUT/0001'
@@ -108,7 +108,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     data = {}
     data['servicio'] = '1'
     data['product'] = '2'
-    data['total_bultos'] = '1'
+    data['total_bultos'] = 2
     #~ data['total_kilos'] = 
     data['observaciones'] = 'Testing Seur API - Get Label'
     data['referencia_expedicion'] = 'S/OUT/0001'
