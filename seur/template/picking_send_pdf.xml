@@ -32,6 +32,7 @@
                         <email_consignatario>${cliente_email}</email_consignatario>
                         <telefono_consignatario>${cliente_telefono}</telefono_consignatario>
                         <atencion_de>${cliente_atencion}</atencion_de>
+                        <id_mercancia>${id_mercancia}</id_mercancia>
                     </bulto>
                     </exp>
                 </root>

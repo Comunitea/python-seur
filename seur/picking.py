@@ -69,6 +69,7 @@ class Picking(API):
             'cliente_email': data.get('cliente_email', ''),
             'cliente_telefono': data.get('cliente_telefono', ''),
             'cliente_atencion': data.get('cliente_atencion', ''),
+            'id_mercancia': data.get('id_mercancia', ''),
             }
 
         if not self.context.get('pdf'):
