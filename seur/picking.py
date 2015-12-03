@@ -85,8 +85,8 @@ class Picking(API):
         #Get message error from XML
         mensaje = dom.getElementsByTagName('mensaje')
         if mensaje:
-            if mensaje[0].firstChild.data == 'ERROR':
-                error = 'Seur return an error when send shipment %s' % vals.get('ref_bulto')
+            if mensaje[0].firstChild.data != 'OK':
+                error = '%s - %s' % (vals['ref_bulto'], mensaje[0].firstChild.data)
                 return reference, label, error
 
         #Get reference from XML
