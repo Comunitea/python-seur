@@ -31,7 +31,7 @@ setup(name='seur',
             'Topic :: Software Development :: Libraries :: Python Modules',
             ],
         install_requires=[
-            'genshi',
+            'genshi>=0.7',
             ],
         license='GPL-3',
         extras_require={
