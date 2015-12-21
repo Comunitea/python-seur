@@ -32,6 +32,10 @@
                         <email_consignatario>${cliente_email}</email_consignatario>
                         <telefono_consignatario>${cliente_telefono}</telefono_consignatario>
                         <atencion_de>${cliente_atencion}</atencion_de>
+                        <test_preaviso>${aviso_preaviso}</test_preaviso>
+                        <test_reparto>${aviso_reparto}</test_reparto>
+                        <test_email>${aviso_email}</test_email>
+                        <test_sms>${aviso_sms}</test_sms>
                         <id_mercancia>${id_mercancia}</id_mercancia>
                     </bulto>
                     </exp>
