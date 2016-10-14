@@ -83,8 +83,10 @@ class Picking(API):
 
         url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
         xml = tmpl.generate(**vals).render()
-
         result = self.connect(url, xml)
+        if not result:
+            return reference, label, 'timed out'
+
         dom = parseString(result)
 
         #Get message error from XML
@@ -133,6 +135,9 @@ class Picking(API):
         url = 'https://ws.seur.com/webseur/services/WSConsultaExpediciones'
         xml = tmpl.generate(**vals).render()
         result = self.connect(url, xml)
+        if not result:
+            return
+
         dom = parseString(result)
 
         #Get info
@@ -165,6 +170,9 @@ class Picking(API):
         url = 'https://ws.seur.com/webseur/services/WSConsultaExpediciones'
         xml = tmpl.generate(**vals).render()
         result = self.connect(url, xml)
+        if not result:
+            return
+
         dom = parseString(result)
 
         #Get list
@@ -227,6 +235,9 @@ class Picking(API):
         xml = tmpl.generate(**vals).render()
 
         result = self.connect(url, xml)
+        if not result:
+            return
+
         dom = parseString(result)
 
         if self.context.get('pdf'):
@@ -237,8 +248,7 @@ class Picking(API):
             traza = dom.getElementsByTagName('traza')
             if traza:
                 return traza[0].firstChild.data
-
-        return None
+        return
 
     def manifiesto(self, data):
         """
@@ -268,12 +278,13 @@ class Picking(API):
         xml = tmpl.generate(**vals).render()
 
         result = self.connect(url, xml)
+        if not result:
+            return
+
         dom = parseString(result)
 
         pdf = dom.getElementsByTagName('ns1:out')
-        if pdf:
-            return pdf[0].firstChild.data
-        return
+        return pdf[0].firstChild.data if pdf else None
 
     def city(self, city):
         """
@@ -293,6 +304,8 @@ class Picking(API):
         url = 'https://ws.seur.com/WSEcatalogoPublicos/servlet/XFireServlet/WSServiciosWebPublicos'
         xml = tmpl.generate(**vals).render()
         result = self.connect(url, xml)
+        if not result:
+            return []
 
         dom = parseString(result)
         info = dom.getElementsByTagName('out')
@@ -331,6 +344,8 @@ class Picking(API):
         url = 'https://ws.seur.com/WSEcatalogoPublicos/servlet/XFireServlet/WSServiciosWebPublicos'
         xml = tmpl.generate(**vals).render()
         result = self.connect(url, xml)
+        if not result:
+            return []
 
         dom = parseString(result)
         info = dom.getElementsByTagName('ns1:out')

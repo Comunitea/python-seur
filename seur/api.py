@@ -3,6 +3,7 @@
 
 from xml.dom.minidom import parseString
 import urllib2
+import socket
 import os
 import genshi
 import genshi.template
@@ -25,10 +26,12 @@ class API(object):
         'seurid',
         'ci',
         'ccc',
+        'timeout',
         'context',
     )
 
-    def __init__(self, username, password, vat, franchise, seurid, ci, ccc, context={}):
+    def __init__(self, username, password, vat, franchise, seurid, ci, ccc,
+            timeout=None, context={}):
         """
         This is the Base API class which other APIs have to subclass. By
         default the inherited classes also get the properties of this
@@ -48,6 +51,7 @@ class API(object):
         :param seurid: identification description
         :param ci: franchise code
         :param ccc: identification description
+        :param timeout: int number of seconds to lost connection
         """
         self.username = username
         self.password = password
@@ -56,6 +60,7 @@ class API(object):
         self.seurid = seurid
         self.ci = ci
         self.ccc = ccc
+        self.timeout = timeout
         self.context = context
 
     def __enter__(self):
@@ -75,8 +80,13 @@ class API(object):
         """
         headers={}
         request = urllib2.Request(url, xml, headers)
-        response = urllib2.urlopen(request)
-        return response.read()
+        try:
+            response = urllib2.urlopen(request, timeout=self.timeout)
+            return response.read()
+        except socket.timeout as err:
+            return
+        except socket.error as err:
+            return
 
     def test_connection(self):
         """
@@ -96,6 +106,8 @@ class API(object):
         url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
         xml = tmpl.generate(**vals).render()
         result = self.connect(url, xml)
+        if not result:
+            return 'timed out'
         dom = parseString(result)
 
         #Get message connection

@@ -1,12 +1,12 @@
 username = ''
 password = ''
-username_expedicion = ''
-password_expedicion = ''
 vat = '' #VAT company
 franchise = '' # Franchise code
 seurid = '' #Description ID Seur
 ci = '' #Customer Code Seur
 ccc = '' #Account Code Seur
+username_expedicion = '' # list and info services
+password_expedicion = '' # list and info services
 
 context = {}
 context['printer'] = 'ZEBRA'
@@ -21,11 +21,11 @@ print "Seur services"
 services = services()
 print services
 
-with API(username, password, vat, franchise, seurid, ci, ccc, context) as seur_api:
+with API(username, password, vat, franchise, seurid, ci, ccc, context=context) as seur_api:
     print "Test connection"
     print seur_api.test_connection()
 
-with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
     print "Send a new shipment - Label ECB"
 
     data = {}
@@ -40,7 +40,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     #~ data['clave_reembolso'] = '' # Add F to invoice
     #~ data['valor_reembolso'] = ''
     data['cliente_nombre'] = 'Zikzakmedia SL'
-    data['cliente_direccion'] = 'Docror Fleming, 28. Baixos'
+    data['cliente_direccion'] = 'Doctor Fleming, 28. Baixos'
     #~ data['cliente_tipovia'] = 'CL'
     #~ data['cliente_tnumvia'] = 'N'
     #~ data['cliente_numvia'] = '93'
@@ -66,7 +66,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
     print "Generated label in /tmp/seur-label.txt"
 
 context['pdf'] = True
-with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
     print "Send a new shipment - Label PDF"
     reference, label, error = picking_api.create(data)
 
@@ -78,7 +78,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
         f.write(decodestring(label))
     print "Generated PDF label in /tmp/seur-label.pdf"
 
-with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
     print "Get info picking"
     data = {}
 
@@ -90,7 +90,7 @@ with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, c
     info = picking_api.info(data)
     print info
 
-with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
 
     print "Get list picking"
     data = {}
@@ -102,7 +102,7 @@ with Picking(username_expedicion, password_expedicion, vat, franchise, seurid, c
     print info
 
 context['pdf'] = True
-with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
     print "Get Label PDF"
 
     data = {}
@@ -136,7 +136,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
         f.write(decodestring(label))
     print "Generated PDF label in /tmp/seur-label.pdf"
 
-with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
     print "Get Manifiesto"
 
     data = {}
@@ -146,7 +146,7 @@ with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as pi
         f.write(decodestring(manifiesto))
     print "Generated PDF label in /tmp/seur-manifiesto.pdf"
 
-with Picking(username, password, vat, franchise, seurid, ci, ccc, context) as picking_api:
+with Picking(username, password, vat, franchise, seurid, ci, ccc, context=context) as picking_api:
     print "Get values from Seur about city or zip"
 
     city = 'Granollers'
