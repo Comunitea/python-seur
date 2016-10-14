@@ -1,0 +1,23 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://consultaExpediciones.servicios.webseur">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <con:consultaExpedicionesStr>
+         <con:in0>S</con:in0>
+         <con:in1></con:in1>
+         <con:in2></con:in2>
+         <con:in3>REFERENCIA</con:in3>
+         <con:in4></con:in4>
+         <con:in5></con:in5>
+         <con:in6></con:in6>
+         <con:in7></con:in7>
+         <con:in8></con:in8>
+         <con:in9></con:in9>
+         <con:in10></con:in10>
+         <con:in11>0</con:in11>
+         <con:in12>USUARIO</con:in12>
+         <con:in13>CONTRASEÑA</con:in13>
+         <con:in14>S</con:in14>
+      </con:consultaExpedicionesStr>
+   </soapenv:Body>
+</soapenv:Envelope>
+	

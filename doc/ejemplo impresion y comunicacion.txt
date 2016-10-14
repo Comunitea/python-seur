@@ -1,0 +1,55 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imp="http://localhost:7026/ImprimirECBWebService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <imp:impresionIntegracionConECBWS>
+         <imp:in0>wsecomm0154</imp:in0>
+         <imp:in1>ws0154ecomm</imp:in1>
+         <imp:in2>ZEBRA</imp:in2>
+         <imp:in3>LP2844-Z</imp:in3>
+         <imp:in4>2C</imp:in4>
+         <imp:in5><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+<exp>
+<bulto>
+<ci>723</ci>
+<nif>B82871013</nif>
+<ccc>7353</ccc>
+<servicio>31</servicio>
+<producto>2</producto>
+<total_bultos>1</total_bultos>
+<total_kilos>0.22</total_kilos>
+<pesoBulto>0.22</pesoBulto>
+<observaciones></observaciones>
+<referencia_expedicion>100000008</referencia_expedicion>
+<ref_bulto>1533 </ref_bulto>
+<clavePortes>F</clavePortes>
+<claveReembolso>F</claveReembolso>
+<valorReembolso>39.83</valorReembolso>
+<nombre_consignatario>Oscar Reales</nombre_consignatario>
+<direccion_consignatario>C Emilio Prados 2 Portal ...
+</direccion_consignatario>
+<tipoVia_consignatario>CL</tipoVia_consignatario>
+<tNumVia_consignatario>N</tNumVia_consignatario>
+<numVia_consignatario>.</numVia_consignatario>
+<escalera_consignatario>.</escalera_consignatario>
+<piso_consignatario>.</piso_consignatario>
+<puerta_consignatario>.</puerta_consignatario>
+<poblacion_consignatario>Mijas Costa</poblacion_consignatario>
+<codPostal_consignatario>29651</codPostal_consignatario>
+<pais_consignatario>ES</pais_consignatario>
+<email_consignatario>oreales@medioglobal.com
+</email_consignatario>
+<telefono_consignatario>952580051</telefono_consignatario>
+<atencion_de>Oscar Reales</atencion_de>
+</bulto>
+</exp>
+</root>
+]]></imp:in5>
+         <imp:in6>fichero.xml</imp:in6>
+         <imp:in7>B82871013</imp:in7>
+         <imp:in8>45</imp:in8>
+         <imp:in9>7353</imp:in9>
+         <imp:in10>IMPACTOWEB</imp:in10>
+      </imp:impresionIntegracionConECBWS>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,33 @@
+ejemplo por POBLACION:
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ecat="http://eCatalogoWS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ecat:infoPoblacionesCortoStr>
+         <ecat:in0></ecat:in0>
+         <ecat:in1>GRANOLLERS</ecat:in1>
+         <ecat:in2></ecat:in2>
+         <ecat:in3></ecat:in3>
+         <ecat:in4></ecat:in4>
+         <ecat:in5>usuario</ecat:in5>
+         <ecat:in6>contraseña</ecat:in6>
+      </ecat:infoPoblacionesCortoStr>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+Te adjunto un ejemplo de consulta de CODIGO POSTAL
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ecat="http://eCatalogoWS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ecat:infoPoblacionesCortoStr>
+         <ecat:in0></ecat:in0>
+         <ecat:in1></ecat:in1>
+         <ecat:in2>08400</ecat:in2>
+         <ecat:in3></ecat:in3>
+         <ecat:in4></ecat:in4>
+         <ecat:in5>usuario</ecat:in5>
+         <ecat:in6>contraseña</ecat:in6>
+      </ecat:infoPoblacionesCortoStr>
+   </soapenv:Body>
+</soapenv:Envelope>

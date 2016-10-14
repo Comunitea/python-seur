@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:det="http://localhost:7026/DetalleBultoPDFWebService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <det:generacionPDFDetalleNoFecha>
+         <det:in0>nif</det:in0>
+         <det:in1>franquicia</det:in1>
+         <det:in2>usuario</det:in2>
+         <det:in3>contraseña</det:in3>
+      </det:generacionPDFDetalleNoFecha>
+   </soapenv:Body>
+</soapenv:Envelope>
