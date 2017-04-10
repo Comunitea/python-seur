@@ -31,7 +31,7 @@ Test connection
 
 .. code-block:: python
 
-    with API(username, password, vat, franchise, seurid, ci, ccc, context) as seur_api:
+    with API(username, password, vat, franchise, seurid, ci, ccc, timeout, context) as seur_api:
         print seur_api.test_connection()
 
 Create/send shipment to Seur
