@@ -4,20 +4,20 @@
 
 import os
 from setuptools import setup, find_packages
-import seur
+__version__ = '0.0.15'
 
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name='seur',
-        version=seur.__version__,
+        version=__version__,
         author='Zikzakmedia SL',
         author_email='zikzak@zikzakmedia.com',
         url="https://www.zikzakmedia.com",
         description="Python API Seur carrier",
         long_description=read('README'),
-        download_url="https://bitbucket.org/zikzakmedia/python-seur",
+        download_url="https://github.com/Comunitea/python-seur.git",
         package_data={'seur': ['template/*']},
         packages=find_packages(),
         classifiers=[
@@ -30,9 +30,7 @@ setup(name='seur',
             'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
             'Topic :: Software Development :: Libraries :: Python Modules',
             ],
-        install_requires=[
-            'genshi>=0.7',
-            ],
+        install_requires=[],
         license='GPL-3',
         extras_require={
         },
