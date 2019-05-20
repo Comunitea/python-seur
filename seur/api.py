@@ -67,7 +67,7 @@ class API(object):
         return self
 
     def __exit__(self, type, value, traceback):
-        return self
+        pass
 
     def connect(self, url, xml):
         """
@@ -75,7 +75,7 @@ class API(object):
 
         :param url: url service.
         :param xml: XML data.
-        
+
         Return XML object
         """
         headers={}

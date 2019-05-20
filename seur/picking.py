@@ -75,7 +75,6 @@ class Picking(API):
             'aviso_sms': data.get('aviso_sms', 'N'),
             'id_mercancia': data.get('id_mercancia', ''),
             }
-
         if not self.context.get('pdf'):
             vals['printer'] = self.context.get('printer', 'ZEBRA')
             vals['printer_model'] = self.context.get('printer_model', 'LP2844-Z')
@@ -83,12 +82,12 @@ class Picking(API):
 
         url = 'http://cit.seur.com/CIT-war/services/ImprimirECBWebService'
         xml = tmpl.generate(**vals).render()
+        xml = xml.encode('iso-8859-1')
         result = self.connect(url, xml)
         if not result:
             return reference, label, 'timed out'
 
         dom = parseString(result)
-
         #Get message error from XML
         mensaje = dom.getElementsByTagName('mensaje')
         if mensaje:
@@ -190,7 +189,6 @@ class Picking(API):
             tmpl = loader.load('picking_label_pdf.xml')
         else:
             tmpl = loader.load('picking_label.xml')
-
         vals = {
             'username': self.username,
             'password': self.password,
@@ -240,7 +238,6 @@ class Picking(API):
             return
 
         dom = parseString(result)
-
         if self.context.get('pdf'):
             pdf = dom.getElementsByTagName('PDF')
             if pdf:
@@ -347,12 +344,13 @@ class Picking(API):
         result = self.connect(url, xml)
         if not result:
             return []
-
-        dom = parseString(result)
+        # -_-
+        result = result.replace('iso-8859-1', 'UTF-8')
+        dom = parseString(result.decode())
         info = dom.getElementsByTagName('ns1:out')
         data = info[0].firstChild.data
 
-        dom2 = parseString(data.encode('utf-8'))
+        dom2 = parseString(data)
         registros = dom2.getElementsByTagName('REGISTROS')
 
         total = registros[0].childNodes.length
@@ -365,5 +363,4 @@ class Picking(API):
             for r in reg.childNodes:
                 vals[r.nodeName] = r.firstChild.data
             values.append(vals)
-
         return values
